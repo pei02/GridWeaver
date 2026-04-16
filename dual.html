@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GridWeaver | 雙排</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="dual">
+<button class="floating-switch" id="pageSwitchBtn">
+  <div class="main-text">單排</div>
+  <div class="sub-text">SINGLE</div>
+</button>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <h1>GridWeaver</h1>
+        <p class="subtitle">Dual Line Array Generator</p>
+      </div>
+    </header>
+
+    <main class="main-layout">
+      <section class="control-panel glass-card">
+        <div class="panel-title">控制面板</div>
+
+        <div class="tabs" id="modeTabs">
+          <button class="tab-btn active" type="button" data-mode="SMT_AOI">SMT AOI</button>
+          <button class="tab-btn" type="button" data-mode="LSC_AOI" hidden>LSC AOI</button>
+          <button class="tab-btn" type="button" data-mode="BSK_3190">3190&amp;BSK</button>
+          <button class="tab-btn" type="button" data-mode="AOI_2900">2900 AOI</button>
+        </div>
+
+        <div class="input-grid">
+          <div class="field">
+            <label for="xInput">X（每區塊欄數）</label>
+            <input id="xInput" type="number" min="1" value="5" />
+          </div>
+
+          <div class="field">
+            <label for="yInput">Y（每區塊列數）</label>
+            <input id="yInput" type="number" min="1" value="6" />
+          </div>
+
+          <div class="field">
+            <label for="blockInput">BLOCK（區塊數）</label>
+            <input id="blockInput" type="number" min="1" value="2" />
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button id="generateBtn" type="button">生成陣列</button>
+          <button id="clearBtn" type="button" class="ghost-btn">清空選取</button>
+        </div>
+
+        <div class="meta-info" id="metaInfo"></div>
+      </section>
+
+      <section class="result-panel glass-card">
+        <div class="panel-title">Grid</div>
+        <div class="grid-board dual-board" id="gridBoard"></div>
+
+        <div class="result-section">
+          <div class="result-header">
+            <div class="result-title">已選取數列</div>
+            <button id="copySelectedBtn" type="button" class="ghost-btn">複製</button>
+          </div>
+          <div class="text-result" id="selectedResult">（尚未選取）</div>
+        </div>
+
+        <div class="result-section">
+          <div class="result-header">
+            <div class="result-title">未選取數列</div>
+            <button id="copyRemainingBtn" type="button" class="ghost-btn">複製</button>
+          </div>
+          <div class="text-result" id="remainingResult">（尚未生成）</div>
+        </div>
+
+        <div class="copy-message" id="copyMessage"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
