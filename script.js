@@ -23,8 +23,8 @@ function getElements() {
   };
 }
 
-function buildBaseArray(total) {
-  return Array.from({ length: total }, (_, i) => i + 1);
+function buildBaseArray(total, start = 1) {
+  return Array.from({ length: total }, (_, i) => i + start);
 }
 
 function to2D(arr, cols) {
@@ -46,23 +46,47 @@ function flatten2D(matrix) {
 function generateSMTAOI(x, y, blockCount) {
   const totalCols = x * blockCount;
   const total = totalCols * y;
-  return to2D(buildBaseArray(total), totalCols);
+  return to2D(buildBaseArray(total, 1), totalCols);
 }
 
 function generateLSCAOI(x, y, blockCount) {
   const totalCols = x * blockCount;
   const total = totalCols * y;
-  const matrix = to2D(buildBaseArray(total), totalCols);
+  const matrix = to2D(buildBaseArray(total, 1), totalCols);
   return matrix.map((row) => [...row].reverse());
 }
 
 function generate2900AOI(x, y, blockCount) {
   const totalCols = x * blockCount;
   const total = totalCols * y;
-  return to2D(buildBaseArray(total).reverse(), totalCols);
+  return to2D(buildBaseArray(total, 1).reverse(), totalCols);
 }
 
-function generate3190BSKSingle(x, y, blockCount) {
+/* 3190：從 0 開始，每個 BLOCK 為連續數字，左到右、上到下遞增 */
+function generate3190Single(x, y, blockCount) {
+  const blockSize = x * y;
+  const rows = [];
+
+  for (let row = 0; row < y; row++) {
+    const rowData = [];
+
+    for (let block = 0; block < blockCount; block++) {
+      const blockStart = block * blockSize;
+
+      for (let col = 0; col < x; col++) {
+        const value = blockStart + row * x + col;
+        rowData.push(value);
+      }
+    }
+
+    rows.push(rowData);
+  }
+
+  return rows;
+}
+
+/* BSK：維持你原本舊邏輯，不變 */
+function generateBSKSingle(x, y, blockCount) {
   const blockSize = x * y;
   const rows = [];
 
@@ -92,8 +116,11 @@ function generateSingleSequence(mode, x, y, blockCount) {
     case "LSC_AOI":
       return generateLSCAOI(x, y, blockCount);
 
-    case "BSK_3190":
-      return generate3190BSKSingle(x, y, blockCount);
+    case "AOI_3190":
+      return generate3190Single(x, y, blockCount);
+
+    case "BSK":
+      return generateBSKSingle(x, y, blockCount);
 
     case "AOI_2900":
       return generate2900AOI(x, y, blockCount);
@@ -114,9 +141,15 @@ function addOffsetToMatrix(matrix, offset) {
 function generateDualSequence(mode, x, y, blockCount) {
   const singleTotal = x * y * blockCount;
 
-  if (mode === "BSK_3190") {
-    const upper = addOffsetToMatrix(generate3190BSKSingle(x, y, blockCount), singleTotal);
-    const lower = generate3190BSKSingle(x, y, blockCount);
+  if (mode === "AOI_3190") {
+    const upper = generate3190Single(x, y, blockCount);
+    const lower = addOffsetToMatrix(generate3190Single(x, y, blockCount), singleTotal);
+    return [...upper, ...lower];
+  }
+
+  if (mode === "BSK") {
+    const upper = addOffsetToMatrix(generateBSKSingle(x, y, blockCount), singleTotal);
+    const lower = generateBSKSingle(x, y, blockCount);
     return [...upper, ...lower];
   }
 
@@ -261,7 +294,8 @@ function updateMetaInfo(x, y, blockCount, matrix) {
   const modeNameMap = {
     SMT_AOI: "SMT AOI",
     LSC_AOI: "LSC AOI",
-    BSK_3190: "3190&BSK",
+    AOI_3190: "3190",
+    BSK: "BSK",
     AOI_2900: "2900 AOI"
   };
 

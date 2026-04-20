@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GridWeaver | 單排</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="GridWeaverICON.png">
 </head>
 <body data-page="single">
-<button class="floating-switch" id="pageSwitchBtn">
-  <div class="main-text">雙排</div>
-  <div class="sub-text">DUAL</div>
-</button>
+  <button class="floating-switch" id="pageSwitchBtn" type="button">
+    <div class="main-text">雙排</div>
+    <div class="sub-text">DUAL</div>
+  </button>
 
   <div class="app-shell">
     <header class="topbar">
@@ -27,8 +28,9 @@
         <div class="tabs" id="modeTabs">
           <button class="tab-btn active" type="button" data-mode="SMT_AOI">SMT AOI</button>
           <button class="tab-btn" type="button" data-mode="LSC_AOI">LSC AOI</button>
-          <button class="tab-btn" type="button" data-mode="BSK_3190">3190&amp;BSK</button>
-          <button class="tab-btn" type="button" data-mode="AOI_2900">2900 AOI</button>
+          <button class="tab-btn" type="button" data-mode="AOI_3190">3190</button>
+          <button class="tab-btn" type="button" data-mode="BSK">BSK</button>
+          <button class="tab-btn" type="button" data-mode="AOI_2900"  hidden>2900 AOI</button>
         </div>
 
         <div class="input-grid">

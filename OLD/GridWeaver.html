@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GridWeaver</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="page-container">
+  <h1>陣列生成工具</h1>
+  <div class="section-title">SMT AOI / 2900</div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label for="xInput">X（每區塊欄數）</label>
+      <input type="number" id="xInput" min="1" value="5" />
+    </div>
+
+    <div class="control-group">
+      <label for="yInput">Y（每區塊列數）</label>
+      <input type="number" id="yInput" min="1" value="6" />
+    </div>
+
+    <div class="control-group">
+      <label for="blockInput">BLOCK（區塊數）</label>
+      <input type="number" id="blockInput" min="1" value="2" />
+    </div>
+
+    <div class="control-group">
+      <label for="modeSelect">排序模式</label>
+      <select id="modeSelect">
+        <option value="SMT AOI">SMT AOI</option>
+        <option value="2900">2900</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <button id="generateBtn">產生表格</button>
+    </div>
+  </div>
+
+  <div class="info" id="infoArea"></div>
+  <div class="error" id="errorArea"></div>
+  <div class="table-wrapper" id="tableContainer"></div>
+  <hr />
+
+  <div class="section-title">3190 &amp; BSK</div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label for="x3190Input">X（每區塊欄數）</label>
+      <input type="number" id="x3190Input" min="1" value="5" />
+    </div>
+
+    <div class="control-group">
+      <label for="y3190Input">Y（每區塊列數）</label>
+      <input type="number" id="y3190Input" min="1" value="6" />
+    </div>
+
+    <div class="control-group">
+      <label for="block3190Input">BLOCK（區塊數）</label>
+      <input type="number" id="block3190Input" min="1" value="2" />
+    </div>
+
+    <div class="control-group">
+      <button id="build3190Btn">生成陣列</button>
+    </div>
+
+    <div class="control-group">
+      <button id="generate3190Btn">生成數列</button>
+    </div>
+  </div>
+
+  <div class="info" id="info3190Area"></div>
+  <div class="error" id="error3190Area"></div>
+  <div class="table-wrapper" id="table3190Container"></div>
+
+<div class="result-header">
+  <div class="result-title">數列生成結果</div>
+  <button id="copy3190Btn" type="button">複製結果</button>
+</div>
+
+<div id="result3190Container" class="text-result"></div>
+<div id="copy3190Message" class="copy-message"></div>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>
